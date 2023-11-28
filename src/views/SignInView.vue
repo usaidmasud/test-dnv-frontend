@@ -32,8 +32,7 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
-import { useRouter } from 'vue-router'
+import {loginService} from '../utils/libs/services/auth.service'
 export default {
   name: 'sign-in',
   data() {
@@ -48,15 +47,10 @@ export default {
   mounted() {},
   methods: {
     async submit() {
-      const router = useRouter()
-      await axios
-        .post('http://127.0.0.1:8000/api' + '/auth/login', {
-          ...this.form
-        })
+      await loginService(this.form)
         .then((res) => {
           sessionStorage.setItem('accessToken', res.data.accessToken)
           this.$router.push({ name: 'dashboard' })
-          // router.push({ name: 'home' })
         })
         .catch((e) => {
           if (e.response.status === 401) {

@@ -83,7 +83,7 @@ router.beforeEach((to, from) => {
   // to.matched.some(record => record.meta.requiresAuth)
   // console.log('router ', store.state.rootModule)
   // if (to.meta.requiresAuth && !auth.isLoggedIn()) {
-  const token = sessionStorage.getItem('authenticated')
+  const token = sessionStorage.getItem('accessToken')
   if (to.meta.requiresAuth && !token) {
     // this route requires auth, check if logged in
     // if not, redirect to login page.
