@@ -2,7 +2,11 @@
   <h5 class="text-xl font-poppins font-medium mb-6">Data Umkm</h5>
 
   <div class="flex justify-end">
-    <button class="bg-primary-main text-white hover:bg-primary-hover duration-300 rounded-lg text-sm px-4 py-2 font-poppins tracking-wide font-medium">Tambah</button>
+    <button
+      class="bg-primary-main text-white hover:bg-primary-hover duration-300 rounded-lg text-sm px-4 py-2 font-poppins tracking-wide font-medium"
+    >
+      Tambah
+    </button>
   </div>
   <div class="table-responsive">
     <table>
@@ -23,7 +27,11 @@
         <tr class="" v-for="(item, index) in dataUmkm" :key="index">
           <td>{{ ++index }}</td>
           <td>{{ item.name }}</td>
-          <td>List Photo</td>
+          <td>
+            <div class="inline-flex gap-2" v-for="photo in item.photos" :key="photo.id">
+              <img class="w-8 h-8" :src="photo.name" alt="" />
+            </div>
+          </td>
           <td>{{ item.description }}</td>
           <td>{{ item.owner_name }}</td>
           <td>{{ item.address }}</td>
