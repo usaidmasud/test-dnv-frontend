@@ -2,20 +2,29 @@
   <div class="w-full flex flex-col items-center font-nunito">
     <div class="px-6 py-10 bg-white rounded-xl overflow-hidden w-full max-w-sm">
       <h2 class="text-xl font-black mb-6 text-center uppercase">Login Form</h2>
-      <form>
+      <form @submit.prevent="submit">
         <div class="mb-2">
           <label for="email" class="label">Email</label>
-          <input type="text" class="input" placeholder="Email" />
+          <input type="text" class="input" placeholder="Email" v-model="form.email" />
         </div>
         <div class="mb-2">
           <label for="password" class="label">Password</label>
-          <input type="password" class="input" placeholder="Password" />
+          <input type="password" class="input" placeholder="Password" v-model="form.password" />
+        </div>
+        <div
+          class="text-sm font-medium px-4 mt-4 py-2 rounded-lg bg-red-50 border border-red-300 shadow-lg text-red-700 w-full"
+          v-if="this.errors"
+        >
+          {{ errors }}
         </div>
         <div class="mt-6">
           <button type="submit" class="button">Login</button>
           <div class="text-center mt-4">
-
-            <RouterLink to="/" class="text-sm font-normal  text-gray-700 hover:font-semibold duration-300 cursor-pointer">Kembali ke halaman utama</RouterLink>
+            <RouterLink
+              to="/"
+              class="text-sm font-normal text-gray-700 hover:font-semibold duration-300 cursor-pointer"
+              >Kembali ke halaman utama</RouterLink
+            >
           </div>
         </div>
       </form>
@@ -23,7 +32,41 @@
   </div>
 </template>
 <script>
-export default {}
+import axios from 'axios'
+import { useRouter } from 'vue-router'
+export default {
+  name: 'sign-in',
+  data() {
+    return {
+      form: {
+        email: 'admin@admin.com',
+        password: 'password'
+      },
+      errors: ''
+    }
+  },
+  mounted() {},
+  methods: {
+    async submit() {
+      const router = useRouter()
+      await axios
+        .post('http://127.0.0.1:8000/api' + '/auth/login', {
+          ...this.form
+        })
+        .then((res) => {
+          sessionStorage.setItem('accessToken', res.data.accessToken)
+          this.$router.push({ name: 'dashboard' })
+          // router.push({ name: 'home' })
+        })
+        .catch((e) => {
+          if (e.response.status === 401) {
+            this.errors = e.response.data.message
+          }
+          console.log('error ', e.response.data)
+        })
+    }
+  }
+}
 </script>
 
 <style>

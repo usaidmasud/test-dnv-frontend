@@ -6,7 +6,7 @@
       <RouterLink to="/"
         ><img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="30" height="30"
       /></RouterLink>
-      <h5 class="font-extrabold text-xl tracking-tight">The Netwerk</h5>
+      <h5 class="font-extrabold text-xl text-gray-800 tracking-tight">The Netwerk</h5>
     </div>
 
     <nav class="inline-flex items-center gap-2">
@@ -46,5 +46,7 @@ export default {
 </script>
 
 <style>
-
+.active {
+  @apply bg-dark-main text-white
+}
 </style>

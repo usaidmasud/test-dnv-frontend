@@ -1,7 +1,5 @@
 <script setup>
-import GuestHeader from './components/GuestHeader.vue'
-
-import { RouterLink, RouterView } from 'vue-router'
+import {  RouterView } from 'vue-router'
 </script>
 
 <template>
@@ -9,14 +7,4 @@ import { RouterLink, RouterView } from 'vue-router'
 </template>
 
 <script>
-export default {
-  components: {
-    GuestHeader
-  }
-}
 </script>
-<style>
-.active {
-  @apply bg-dark-main text-white;
-}
-</style>
