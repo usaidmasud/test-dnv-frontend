@@ -35,15 +35,25 @@
         ></textarea>
         <div class="form-group">
           <label class="label" for="">Provinsi</label>
-          <select @change="fetchRegencies(this.model.province_id)" v-model="model.province_id" name="province_id" id="province_id" class="input">
-            <option v-for="(item, index) in this.provinces" :key="index" :value="item.id">{{ item.name }}</option>
+          <select
+            @change="fetchRegencies(this.model.province_id)"
+            v-model="model.province_id"
+            name="province_id"
+            id="province_id"
+            class="input"
+          >
+            <option v-for="(item, index) in this.provinces" :key="index" :value="item.id">
+              {{ item.name }}
+            </option>
           </select>
         </div>
       </div>
       <div class="form-group">
         <label class="label" for="">Kota</label>
-        <select  v-model="model.city_id" name="city_id" id="city_id" class="input">
-          <option v-for="(item, index) in this.cities" :key="index" :value="item.id">{{ item.name }}</option>
+        <select v-model="model.city_id" name="city_id" id="city_id" class="input">
+          <option v-for="(item, index) in this.cities" :key="index" :value="item.id">
+            {{ item.name }}
+          </option>
         </select>
       </div>
 
@@ -99,8 +109,8 @@ export default {
   data() {
     return {
       files: [],
-      provinces:[],
-      cities:[],
+      provinces: [],
+      cities: [],
       model: {
         name: '',
         description: '-',
@@ -156,11 +166,11 @@ export default {
         })
     },
     async fetchProvince() {
-      const response = await getProvince();
+      const response = await getProvince()
       this.provinces = response.data
     },
     async fetchRegencies(id) {
-      const response = await getRegencies(id);
+      const response = await getRegencies(id)
       this.cities = response.data
       console.log(this.cities)
     }

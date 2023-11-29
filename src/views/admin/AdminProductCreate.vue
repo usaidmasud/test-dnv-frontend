@@ -21,7 +21,13 @@
       </div>
       <div class="form-group">
         <label class="label" for="">Deskripsi</label>
-        <textarea v-model="model.description" cols="30" rows="3" placeholder="Deskripsi Produk" class="input" ></textarea>
+        <textarea
+          v-model="model.description"
+          cols="30"
+          rows="3"
+          placeholder="Deskripsi Produk"
+          class="input"
+        ></textarea>
       </div>
       <div class="form-group">
         <label class="label" for="">Harga</label>

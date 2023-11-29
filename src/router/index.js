@@ -5,6 +5,7 @@ import AuthLayoutView from '../layouts/AuthLayoutView.vue'
 import GuestLayoutView from '../layouts/GuestLayoutView.vue'
 import HomeView from '../views/HomeView.vue'
 import ProductView from '../views/ProductView.vue'
+import ProductUMKMView from '../views/ProductUMKMView.vue'
 import ProductDetail from '../views/ProductDetail.vue'
 import SignInView from '../views/SignInView.vue'
 import UmkmView from '../views/UmkmView.vue'
@@ -48,6 +49,12 @@ const router = createRouter({
           name: 'product.detail',
           meta: { requiresAuth: false },
           component: ProductDetail
+        },
+        {
+          path: '/umkm/product/:id',
+          name: 'product.umkm',
+          meta: { requiresAuth: false },
+          component: ProductUMKMView
         }
       ]
     },

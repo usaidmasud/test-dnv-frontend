@@ -3,37 +3,19 @@
 <template>
   <main class="font-nunito w-full">
     <!-- search produk -->
-    <section class=""></section>
     <!-- ./search produk -->
 
     <!-- section umkm -->
-    <section class="">
+    <UmkmSection :umkms="umkms">
       <div class="mb-6 text-center">
         <h5 class="font-semibold font-inter text-xl">Daftar UMKM</h5>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="" v-for="(umkm, index) in umkms" :key="index">
-          <div
-            class="bg-white rounded-xl h-60 shadow-lg p-6 flex flex-col items-center overflow-hidden bg-cover object-cover relative"
-          >
-            <div class="w-16 h-16 bg-slate-100 p-1 shadow-lg rounded-full">
-              <img :src="'http://localhost:8000/storage/' + umkm.photos[0].name" alt="" class="" />
-            </div>
-            <div class="text-center mt-4">
-              <h5 class="font-bold font-inter text-base">{{ umkm.name }}</h5>
-              <p class="font-normal mt-0 text-sm font-nunito">{{ umkm.description }}</p>
-            </div>
-            <div class="absolute bottom-4">
-              <button
-                class="px-4 py-1.5 bg-info-main text-white rounded-xl w-full block text-sm hover:bg-info-hover duration-300"
-              >
-                Lihat Produk
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+      <template #footer >
+        <RouterLink class="flex justify-center my-4" to="/umkm">
+          <button class="px-4 py-2 text-sm font-inter font-medium bg-info-main text-white hover:bg-info-hover duration-300">Lihat Semua</button>
+        </RouterLink>
+      </template>
+    </UmkmSection>
     <!-- ./section umkm -->
 
     <!-- section produk -->
@@ -50,6 +32,15 @@
             </button>
           </div>
         </div>
+        <template #footer>
+          <div class="flex justify-center my-6">
+            <Pagination
+              :currentPage="meta.page"
+              :totalPages="meta.totalPage"
+              @page-change="handlePageChange"
+            />
+          </div>
+        </template>
       </ProductSection>
     </section>
     <!-- ./section produk -->
@@ -57,30 +48,53 @@
 </template>
 
 <script>
+import Pagination from '../components/Pagination.vue'
 import ProductSection from '../components/ProductSection.vue'
+import UmkmSection from '../components/UmkmSection.vue'
 import { getProductPublicService } from '../utils/libs/services/product.public.service'
 import { getUmkmPublicService } from '../utils/libs/services/umkm.public.service'
+
 export default {
   name: 'home-view',
   data() {
     return {
+      meta: {
+        page: 1,
+        per_page:3,
+        totalPage: 0,
+        total: 0
+      },
+      metaUmkm: {
+        page: 1,
+        per_page:3,
+        totalPage: 0,
+        total: 0
+      },
       umkms: [],
       products: []
     }
   },
-  components: { ProductSection },
+  components: { ProductSection, UmkmSection, Pagination },
   mounted() {
-    this.getUmkm()
-    this.getProduct()
+    this.getUmkm(this.metaUmkm)
+    this.getProduct(this.meta)
   },
   methods: {
-    async getUmkm() {
-      const response = await getUmkmPublicService()
+    async getUmkm(params) {
+      const response = await getUmkmPublicService(params)
       this.umkms = response.data.data
     },
-    async getProduct() {
-      const response = await getProductPublicService()
+    async getProduct(params) {
+      const response = await getProductPublicService(params)
       this.products = response.data.data
+      this.meta.total = response.data.meta.total
+      this.meta.totalPage = response.data.meta.last_page
+    },
+    handlePageChange(page) {
+      // Handle page change logic (e.g., fetch data for the new page)
+      this.meta.page = page
+      this.getProduct(this.meta)
+      console.log('meta',this.meta)
     }
   }
 }

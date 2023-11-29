@@ -37,7 +37,8 @@ export const getProvince = async () => {
   return response
 }
 export const getRegencies = async (id) => {
-  const response = await axios.get(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${id}.json`
+  const response = await axios.get(
+    `https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${id}.json`
   )
   return response
 }

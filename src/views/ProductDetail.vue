@@ -66,6 +66,15 @@
         </button>
       </div>
     </div>
+    <template #footer>
+      <div class="flex justify-center my-6">
+        <Pagination
+          :currentPage="meta.page"
+          :totalPages="meta.totalPage"
+          @page-change="handlePageChange"
+        />
+      </div>
+    </template>
   </ProductSection>
 </template>
 
@@ -75,33 +84,46 @@ import {
   getProductPublicService
 } from '../utils/libs/services/product.public.service'
 import ProductSection from '../components/ProductSection.vue'
+import Pagination from '../components/Pagination.vue'
 
 export default {
   name: 'home-product-detail',
   data() {
     return {
+      meta: {
+        page: 1,
+        per_page: 3,
+        totalPage: 0,
+        total: 0
+      },
       product: null,
       products: []
     }
   },
   components: {
-    ProductSection
+    ProductSection,
+    Pagination
   },
   mounted() {
     this.fetchProductDetail(this.$route.params.id)
-    this.fetchAllProduct()
-  },
-  updated() {
-    this.fetchProductDetail(this.$route.params.id)
+    this.getProduct(this.meta)
   },
   methods: {
     async fetchProductDetail(id) {
       const response = await getProductPublicServiceById(id)
       this.product = response.data.data
     },
-    async fetchAllProduct(id) {
-      const response = await getProductPublicService(id)
+    async getProduct(params) {
+      const response = await getProductPublicService(params)
       this.products = response.data.data
+      this.meta.total = response.data.meta.total
+      this.meta.totalPage = response.data.meta.last_page
+    },
+    handlePageChange(page) {
+      // Handle page change logic (e.g., fetch data for the new page)
+      this.meta.page = page
+      this.getProduct(this.meta)
+      console.log('meta', this.meta)
     }
   }
 }

@@ -18,10 +18,10 @@
 <style></style>
 
 <script>
-import { getProductPublicService } from '../utils/libs/services/product.public.service'
 import ProductSection from '../components/ProductSection.vue'
 import Pagination from '../components/Pagination.vue'
 import SectionTitle from '../components/SectionTitle.vue'
+import { getUmkmProductPublicService } from '../utils/libs/services/umkm.public.service'
 
 export default {
   name: 'product-view',
@@ -37,14 +37,16 @@ export default {
     }
   },
   components: {
-    ProductSection,Pagination,SectionTitle
+    ProductSection,
+    Pagination,
+    SectionTitle
   },
   mounted() {
-    this.getProduct(this.meta)
+    this.getProduct(this.$route.params.id, this.meta)
   },
   methods: {
-    async getProduct(id) {
-      const response = await getProductPublicService(id)
+    async getProduct(id, params) {
+      const response = await getUmkmProductPublicService(id, params)
       this.products = response.data.data
       this.meta.total = response.data.meta.total
       this.meta.totalPage = response.data.meta.last_page
@@ -52,8 +54,7 @@ export default {
     handlePageChange(page) {
       // Handle page change logic (e.g., fetch data for the new page)
       this.meta.page = page
-      this.getProduct(this.meta)
-      console.log('meta', this.meta)
+      this.getProduct(this.$route.params.id, this.meta)
     }
   }
 }

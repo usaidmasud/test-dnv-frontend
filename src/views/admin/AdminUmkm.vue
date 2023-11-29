@@ -42,7 +42,7 @@
               ></div>
             </div> -->
             <div v-for="(photo, key) in item.photos" :key="key">
-              <img  class="w-8 h-8" :src="'http://localhost:8000/storage/' + photo.name" alt="" />
+              <img class="w-8 h-8" :src="'http://localhost:8000/storage/' + photo.name" alt="" />
             </div>
           </td>
           <td>{{ item.description }}</td>
@@ -96,8 +96,7 @@ export default {
       dataUmkm: []
     }
   },
-  components: {
-  },
+  components: {},
   mounted() {
     this.fetchUmkm()
   },

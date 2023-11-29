@@ -35,15 +35,25 @@
         ></textarea>
         <div class="form-group">
           <label class="label" for="">Provinsi</label>
-          <select @change="fetchRegencies(this.model.province_id)" v-model="model.province_id" name="" id="" class="input">
-            <option v-for="(item, index) in provinces" :key="index" :value="item.id">{{ item.name }}</option>
+          <select
+            @change="fetchRegencies(this.model.province_id)"
+            v-model="model.province_id"
+            name=""
+            id=""
+            class="input"
+          >
+            <option v-for="(item, index) in provinces" :key="index" :value="item.id">
+              {{ item.name }}
+            </option>
           </select>
         </div>
       </div>
       <div class="form-group">
         <label class="label" for="">Kota</label>
         <select v-model="model.city_id" name="" id="" class="input">
-          <option v-for="(item, index) in cities" :key="index" :value="item.id">{{ item.name }}</option>
+          <option v-for="(item, index) in cities" :key="index" :value="item.id">
+            {{ item.name }}
+          </option>
         </select>
       </div>
 
@@ -94,7 +104,12 @@
 <script>
 import { MESSAGE_STATE } from '../../utils/constants/message.constant'
 import { uploadFileService } from '../../utils/libs/services/file.service'
-import { getProvince, getRegencies, getUmkmServiceById, updateUmkmService } from '../../utils/libs/services/umkm.service'
+import {
+  getProvince,
+  getRegencies,
+  getUmkmServiceById,
+  updateUmkmService
+} from '../../utils/libs/services/umkm.service'
 export default {
   name: 'AdminUmkmEdit',
   data() {
@@ -181,11 +196,11 @@ export default {
         })
     },
     async fetchProvince() {
-      const response = await getProvince();
+      const response = await getProvince()
       this.provinces = response.data
     },
     async fetchRegencies(id) {
-      const response = await getRegencies(id);
+      const response = await getRegencies(id)
       this.cities = response.data
       console.log(this.cities)
     }
