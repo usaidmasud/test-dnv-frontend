@@ -21,12 +21,12 @@ import { RouterView } from 'vue-router'
           to="/admin/umkm"
           >Umkm</RouterLink
         >
-        <!-- <RouterLink
-        active-class="active"
+        <RouterLink
+          active-class="active"
           class="px-2 py-1 hover:bg-gray-200 hover:text-gray-700 duration-300 rounded-lg w-full text-sm tracking-wider font-medium font-poppins"
           to="/admin/product"
           >Product</RouterLink
-        > -->
+        >
       </div>
     </div>
     <main class="w-[calc(100%-190px)] text-gray-700 bg-slate-100">

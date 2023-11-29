@@ -1,55 +1,27 @@
 <template>
-  <h5 class="text-xl font-poppins font-medium mb-6">Ubah Data Umkm</h5>
+  <h5 class="text-xl font-poppins font-medium mb-6">Tambah Data Product</h5>
   <div class="py-6">
     <form>
       <div class="form-group">
         <label class="label" for="">Nama UMKM</label>
-        <input v-model="model.name" type="text" placeholder="Nama Umkm" class="input" />
-      </div>
-      <div class="form-group">
-        <label class="label" for="">Nama Pemilik</label>
-        <input v-model="model.owner_name" type="text" placeholder="Nama Pemilik" class="input" />
-      </div>
-      <div class="form-group">
-        <label class="label" for="">Deskripsi</label>
-        <textarea
-          v-model="model.description"
-          name=""
-          id=""
-          cols="30"
-          rows="3"
-          placeholder="Deskripsi"
-          class="input"
-        ></textarea>
-      </div>
-      <div class="form-group">
-        <label class="label" for="">Alamat</label>
-        <textarea
-          v-model="model.address"
-          name=""
-          id=""
-          cols="30"
-          rows="3"
-          placeholder="Alamat"
-          class="input"
-        ></textarea>
-        <div class="form-group">
-          <label class="label" for="">Provinsi</label>
-          <select v-model="model.province" name="" id="" class="input">
-            <option value="-">Select</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="label" for="">Kota</label>
-        <select v-model="model.city" name="" id="" class="input">
-          <option value="-">Select</option>
+        <select name="umkm_id" class="input" id="umkm_id" v-model="model.umkm_id">
+          <option value="" disabled>Pilih UMKM</option>
+          <option v-for="(umkm, index) in umkms" :key="index" :value="umkm.id">
+            {{ umkm.name }}
+          </option>
         </select>
       </div>
-
       <div class="form-group">
-        <label class="label" for="">No HP</label>
-        <input v-model="model.contact" type="text" placeholder="Nomor HP" class="input" />
+        <label class="label" for="">Kode</label>
+        <input v-model="model.code" type="text" placeholder="Kode" class="input" />
+      </div>
+      <div class="form-group">
+        <label class="label" for="">Nama Product</label>
+        <input v-model="model.name" type="text" placeholder="Nama Product" class="input" />
+      </div>
+      <div class="form-group">
+        <label class="label" for="">Harga</label>
+        <input v-model="model.price" type="number" placeholder="Harga" class="input" />
       </div>
 
       <div v-if="this.model.photos.length > 0" class="flex gap-2 py-4">
@@ -76,7 +48,6 @@
           </div>
         </div>
       </div>
-
       <div class="form-group">
         <label class="label" for="">Photo</label>
         <input @change="uploadImage" type="file" multiple class="input" />
@@ -86,63 +57,48 @@
           {{ error[0] }}
         </li>
       </ul>
-      <button type="button" @click="handleUpdate" class="button">Update</button>
+      <button type="button" @click="handleStore" class="button">Simpan</button>
     </form>
   </div>
 </template>
 
 <script>
-import { MESSAGE_STATE } from '../../utils/constants/message.constant'
+import { getUmkmService } from '../../utils/libs/services/umkm.service'
 import { uploadFileService } from '../../utils/libs/services/file.service'
-import { getUmkmServiceById, updateUmkmService } from '../../utils/libs/services/umkm.service'
+import { MESSAGE_STATE } from '../../utils/constants/message.constant'
+import { storeProductService } from '../../utils/libs/services/product.service'
 export default {
-  name: 'AdminUmkmEdit',
+  name: 'AdminProductCreate',
   data() {
     return {
+      files: [],
+      umkms: [],
       model: {
+        umkm_id: '',
+        code: '',
         name: '',
-        description: '',
-        address: '',
-        city: '',
-        province: '',
-        owner_name: '',
-        contact: '',
+        price: 0,
         photos: []
       },
       errorList: {}
     }
   },
+  components: {},
   mounted() {
-    this.getDetail(this.$route.params.id)
+    this.fetchUmkm()
   },
   methods: {
-    async getDetail(id) {
-      await getUmkmServiceById(id)
-        .then((res) => {
-          const data = res.data.data
-          this.model.name = data.name
-          this.model.description = data.description
-          this.model.address = data.address
-          this.model.city = data.city
-          this.model.province = data.province
-          this.model.owner_name = data.owner_name
-          this.model.contact = data.contact
-          this.model.photos = data.photos.map((item) => {
-            return item.name
-          })
-        })
-        .catch(() => {
-          alert('record not found')
-          this.$route.params('/admin/umkm')
-        })
+    async fetchUmkm() {
+      const response = await getUmkmService()
+      this.umkms = response.data.data
     },
-    async handleUpdate() {
+    async handleStore() {
       var myThis = this
       myThis.errorList = {}
-      await updateUmkmService(this.$route.params.id, myThis.model)
+      await storeProductService(myThis.model)
         .then(() => {
-          this.$swal(MESSAGE_STATE.UPDATE_SUCCESS)
-          this.$router.push({ name: 'admin.umkm' })
+          this.$swal(MESSAGE_STATE.STORE_SUCCESS)
+          this.$router.push({ name: 'admin.product' })
         })
         .catch((error) => {
           if (error.response) {
@@ -165,9 +121,7 @@ export default {
       }
       await uploadFileService(formData)
         .then((res) => {
-          const merged = [...this.model.photos, ...res.data.files]
-
-          this.model.photos = merged
+          this.model.photos = res.data.files
           console.log('image', res.data)
         })
         .catch((e) => {

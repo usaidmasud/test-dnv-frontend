@@ -11,6 +11,9 @@ import Dashboard from '../views/admin/Dashboard.vue'
 import AdminUmkm from '../views/admin/AdminUmkm.vue'
 import AdminUmkmCreate from '../views/admin/AdminUmkmCreate.vue'
 import AdminUmkmEdit from '../views/admin/AdminUmkmEdit.vue'
+import AdminProduct from '../views/admin/AdminProduct.vue'
+import AdminProductCreate from '../views/admin/AdminProductCreate.vue'
+import AdminProductEdit from '../views/admin/AdminProductEdit.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -86,6 +89,24 @@ const router = createRouter({
           name: 'admin.umkm.edit',
           meta: { requiresAuth: true },
           component: AdminUmkmEdit
+        },
+        {
+          path: '/admin/product',
+          name: 'admin.product',
+          meta: { requiresAuth: true },
+          component: AdminProduct
+        },
+        {
+          path: '/admin/product/create',
+          name: 'admin.product.create',
+          meta: { requiresAuth: true },
+          component: AdminProductCreate
+        },
+        {
+          path: '/admin/product/:id/edit',
+          name: 'admin.product.edit',
+          meta: { requiresAuth: true },
+          component: AdminProductEdit
         }
       ]
     }

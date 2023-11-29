@@ -9,8 +9,12 @@ export const getProductServiceById = async (id) => {
   return response
 }
 export const storeProductService = async (data) => {
-  const response = await instance.post('/product/', data)
-  return response
+  return new Promise((resolve, reject) => {
+    instance
+      .post('/product/', data)
+      .then((res) => resolve(res))
+      .catch((error) => reject(error))
+  })
 }
 export const updateProductService = async (id, data) => {
   const response = await instance.patch('/product/' + id, data)
