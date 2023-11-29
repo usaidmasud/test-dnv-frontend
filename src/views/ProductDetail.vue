@@ -3,10 +3,20 @@
     <div class="w-2/6">
       <div class="">
         <img
-          :src="'http://localhost:8000/storage/' + product?.photos[0]?.name"
+          :src="'http://localhost:8000/storage/' + imageActiveLink"
           alt=""
-          class="h-60"
+          class="h-60 object-cover border border-gray-300 rounded-lg shadow-lg"
         />
+        <div class="mt-6 flex gap-2 flex-wrap">
+          <div class="" v-for="(photo, index) in product?.photos" :key="index">
+            <img
+              @click="handleActiveImage(photo.name)"
+              :src="'http://localhost:8000/storage/' + photo.name"
+              alt=""
+              class="w-16 h-16 border border-gray-300 rounded-lg p-2 cursor-pointer shadow-lg"
+            />
+          </div>
+        </div>
       </div>
     </div>
     <div class="w-4/6">
@@ -20,8 +30,36 @@
           <span class="text-sm">1.1Rb Terjual</span>
         </div>
       </div>
-      <p class="text-sm my-4 max-w-sm leading-relaxed">{{ product?.description }}</p>
+      <p class="text-base my-4 max-w-sm leading-relaxed">{{ product?.description }}</p>
+
       <div class="my-4">
+        <div class="flex mb-4">
+          <a
+            href="https://www.google.com/maps?q=-8.59026927279089, 116.24853979429908"
+            target="_blank"
+            class="text-sm font-inter hover:text-danger-main duration-300 inline-flex gap-1 py-1 px-2 border border-gray-300 rounded-full  hover:border-danger-main"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+              />
+            </svg>
+            Buka map</a
+          >
+        </div>
         <h5 class="font-semibold font-inter text-xl text-danger-main">
           {{ filters.formatMoney(product?.price) }}
         </h5>
@@ -90,11 +128,13 @@ export default {
   name: 'home-product-detail',
   data() {
     return {
+      imageActiveLink: '',
       meta: {
         page: 1,
         per_page: 3,
         totalPage: 0,
-        total: 0
+        total: 0,
+        search: ''
       },
       product: null,
       products: []
@@ -112,6 +152,7 @@ export default {
     async fetchProductDetail(id) {
       const response = await getProductPublicServiceById(id)
       this.product = response.data.data
+      this.imageActiveLink = this.product?.photos[0]?.name
     },
     async getProduct(params) {
       const response = await getProductPublicService(params)
@@ -124,6 +165,10 @@ export default {
       this.meta.page = page
       this.getProduct(this.meta)
       console.log('meta', this.meta)
+    },
+    handleActiveImage(val) {
+      this.imageActiveLink = val
+      console.log(val)
     }
   }
 }

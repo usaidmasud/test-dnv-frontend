@@ -18,7 +18,7 @@
           </div>
           <div class="p-4">
             <!-- :to="'/product/' + product.id" -->
-            <RouterLink :to="'/product/'+product.id" >
+            <a :href="'/product/'+product.id" >
               <div class="group">
                 <h5 class="font-inter duration-300 font-normal text-sm">{{ product.name }}</h5>
 
@@ -26,7 +26,7 @@
                 {{ filters.formatMoney(product.price) }}
               </h5>
               </div>
-            </RouterLink>
+            </a>
             <div class="mt-2 flex justify-between items-center">
               <span class="text-xs font-semibold font-nunito">{{
                 product.umkm.province.name

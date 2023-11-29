@@ -62,13 +62,15 @@ export default {
         page: 1,
         per_page:3,
         totalPage: 0,
-        total: 0
+        total: 0,
+        search:""
       },
       metaUmkm: {
         page: 1,
         per_page:3,
         totalPage: 0,
-        total: 0
+        total: 0,
+        search:""
       },
       umkms: [],
       products: []
