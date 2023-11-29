@@ -17,7 +17,7 @@ defineProps({
       Owner : <span class="font-bold">{{ data.owner_name }}</span>
     </h6>
     <p class="text-sm mt-2 font-normal w-full max-w-lg text-center">{{ data.description }}}</p>
-    <div class="mt-4 ">
+    <div class="mt-4">
       <ul class="text-xs">
         <li class="">
           <span class="">Alamat</span>
@@ -25,7 +25,7 @@ defineProps({
         </li>
       </ul>
     </div>
-    <div class="mt-4 w-full text-center ">
+    <div class="mt-4 w-full text-center">
       <button class="text-sm font-semibold bg-violet-600 text-white rounded-lg px-3 py-1">
         Lihat Produk
       </button>

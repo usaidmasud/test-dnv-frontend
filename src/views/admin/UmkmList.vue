@@ -1,13 +1,7 @@
-<template>
-  list umkm
-</template>
+<template>list umkm</template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>
 
-<style>
-
-</style>
+<style></style>

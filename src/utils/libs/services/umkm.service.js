@@ -5,12 +5,20 @@ export const getUmkmService = async () => {
   return response
 }
 export const getUmkmServiceById = async (id) => {
-  const response = await instance.get('/umkm/' + id)
-  return response
+  return new Promise((resolve, reject) => {
+    instance
+      .get('/umkm/' + id)
+      .then((res) => resolve(res))
+      .catch((err) => reject(err))
+  })
 }
 export const storeUmkmService = async (data) => {
-  const response = await instance.post('/umkm/', data)
-  return response
+  return new Promise((resolve, reject) => {
+    instance
+      .post('/umkm/', data)
+      .then((res) => resolve(res))
+      .catch((e) => reject(e))
+  })
 }
 export const updateUmkmService = async (id, data) => {
   const response = await instance.patch('/umkm/' + id, data)

@@ -1,15 +1,9 @@
 <template>
-    <div>
-        hello
-    </div>
+  <div>hello</div>
 </template>
 
-<script >
-    export default {
-        
-    }
+<script>
+export default {}
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

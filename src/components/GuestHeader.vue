@@ -28,7 +28,7 @@
         active-class="active"
         >Product</RouterLink
       >
-      <RouterLink class="ml-4" :to="{name:'signin'}"
+      <RouterLink class="ml-4" :to="{ name: 'signin' }"
         ><button
           class="px-2 py-1 rounded-lg bg-primary-main text-white text-sm font-semibold hover:bg-primary-hover duration-300"
         >
@@ -40,13 +40,11 @@
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>
 
 <style>
 .active {
-  @apply bg-dark-main text-white
+  @apply bg-dark-main text-white;
 }
 </style>

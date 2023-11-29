@@ -9,6 +9,8 @@ import SignInView from '../views/SignInView.vue'
 import UmkmView from '../views/UmkmView.vue'
 import Dashboard from '../views/admin/Dashboard.vue'
 import AdminUmkm from '../views/admin/AdminUmkm.vue'
+import AdminUmkmCreate from '../views/admin/AdminUmkmCreate.vue'
+import AdminUmkmEdit from '../views/admin/AdminUmkmEdit.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -62,16 +64,28 @@ const router = createRouter({
       meta: { requiresAuth: true },
       children: [
         {
-          path: '/admin/dashboard',
-          name: 'dashboard',
+          path: '/admin',
+          name: 'admin',
           meta: { requiresAuth: true },
           component: Dashboard
         },
         {
           path: '/admin/umkm',
-          name: 'admin-umkm',
+          name: 'admin.umkm',
           meta: { requiresAuth: true },
           component: AdminUmkm
+        },
+        {
+          path: '/admin/umkm/create',
+          name: 'admin.umkm.create',
+          meta: { requiresAuth: true },
+          component: AdminUmkmCreate
+        },
+        {
+          path: '/admin/umkm/:id/edit',
+          name: 'admin.umkm.edit',
+          meta: { requiresAuth: true },
+          component: AdminUmkmEdit
         }
       ]
     }

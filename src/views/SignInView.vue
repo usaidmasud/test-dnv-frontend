@@ -32,7 +32,7 @@
   </div>
 </template>
 <script>
-import {loginService} from '../utils/libs/services/auth.service'
+import { loginService } from '../utils/libs/services/auth.service'
 export default {
   name: 'sign-in',
   data() {
@@ -50,7 +50,7 @@ export default {
       await loginService(this.form)
         .then((res) => {
           sessionStorage.setItem('accessToken', res.data.accessToken)
-          this.$router.push({ name: 'dashboard' })
+          this.$router.push({ name: 'admin' })
         })
         .catch((e) => {
           if (e.response.status === 401) {
