@@ -1,10 +1,10 @@
 <template>
-  <h5 class="text-xl font-poppins font-medium">Data Umkm</h5>
+  <h5 class="text-xl font-inter font-medium">Data Umkm</h5>
 
   <div class="flex justify-end py-6">
     <button
       @click="handleAdd"
-      class="bg-primary-main text-white hover:bg-primary-hover duration-300 rounded-lg text-sm px-4 py-2 font-poppins tracking-wide font-medium"
+      class="bg-primary-main text-white hover:bg-primary-hover duration-300 rounded-lg text-sm px-4 py-2 font-inter tracking-wide font-medium"
     >
       Tambah
     </button>
@@ -19,8 +19,8 @@
           <th>Deskripsi</th>
           <th>Nama Owner</th>
           <th>Alamat</th>
-          <th>Kota</th>
           <th>Provinsi</th>
+          <th>Kota</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -48,8 +48,8 @@
           <td>{{ item.description }}</td>
           <td>{{ item.owner_name }}</td>
           <td>{{ item.address }}</td>
-          <td>{{ item.city }}</td>
-          <td>{{ item.province }}</td>
+          <td>{{ item.province.name }}</td>
+          <td>{{ item.city.name }}</td>
           <td>
             <div class="inline-flex items-center gap-1">
               <RouterLink
@@ -58,14 +58,14 @@
                 }"
               >
                 <button
-                  class="px-2 py-1 rounded-lg bg-green-700 hover:bg-green-800 text-gray-100 duration-300 text-xs font-medium font-poppins"
+                  class="px-2 py-1 rounded-lg bg-green-700 hover:bg-green-800 text-gray-100 duration-300 text-xs font-medium font-inter"
                 >
                   Edit
                 </button>
               </RouterLink>
               <button
                 @click="handleDelete(item.id)"
-                class="px-2 py-1 rounded-lg bg-red-700 hover:bg-red-800 text-gray-100 duration-300 text-xs font-medium font-poppins"
+                class="px-2 py-1 rounded-lg bg-red-700 hover:bg-red-800 text-gray-100 duration-300 text-xs font-medium font-inter"
               >
                 Hapus
               </button>
@@ -147,9 +147,9 @@ table {
   @apply w-full table-auto;
 }
 table th {
-  @apply border-b-2 border-gray-400 px-4 py-1.5 text-sm font-semibold font-poppins;
+  @apply border-b-2 border-gray-400 px-4 py-1.5 text-sm font-semibold font-inter;
 }
 table td {
-  @apply px-4 py-1.5 border-b border-gray-300 font-normal text-sm font-poppins;
+  @apply px-4 py-1.5 border-b border-gray-300 font-normal text-sm font-inter;
 }
 </style>

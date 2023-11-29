@@ -1,5 +1,5 @@
 <template>
-  <h5 class="text-xl font-poppins font-medium mb-6">Tambah Data Umkm</h5>
+  <h5 class="text-xl font-inter font-medium mb-6">Tambah Data Umkm</h5>
   <div class="py-6">
     <form>
       <div class="form-group">
@@ -35,15 +35,15 @@
         ></textarea>
         <div class="form-group">
           <label class="label" for="">Provinsi</label>
-          <select v-model="model.province" name="" id="" class="input">
-            <option value="-">Select</option>
+          <select @change="fetchRegencies(this.model.province_id)" v-model="model.province_id" name="province_id" id="province_id" class="input">
+            <option v-for="(item, index) in this.provinces" :key="index" :value="item.id">{{ item.name }}</option>
           </select>
         </div>
       </div>
       <div class="form-group">
         <label class="label" for="">Kota</label>
-        <select v-model="model.city" name="" id="" class="input">
-          <option value="-">Select</option>
+        <select  v-model="model.city_id" name="city_id" id="city_id" class="input">
+          <option v-for="(item, index) in this.cities" :key="index" :value="item.id">{{ item.name }}</option>
         </select>
       </div>
 
@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import { storeUmkmService } from '../../utils/libs/services/umkm.service'
+import { getProvince, getRegencies, storeUmkmService } from '../../utils/libs/services/umkm.service'
 import { uploadFileService } from '../../utils/libs/services/file.service'
 import { MESSAGE_STATE } from '../../utils/constants/message.constant'
 export default {
@@ -99,21 +99,25 @@ export default {
   data() {
     return {
       files: [],
+      provinces:[],
+      cities:[],
       model: {
-        name: 'Syarip',
-        description: 'xxx',
-        address: 'Keru',
-        city: '-',
-        province: '-',
-        owner_name: 'masud',
-        contact: '087852373926',
+        name: '',
+        description: '-',
+        address: '-',
+        city_id: '',
+        province_id: '',
+        owner_name: '',
+        contact: '',
         photos: []
       },
       errorList: {}
     }
   },
   components: {},
-  mounted() {},
+  mounted() {
+    this.fetchProvince()
+  },
   methods: {
     async handleStore() {
       var myThis = this
@@ -150,6 +154,15 @@ export default {
         .catch((e) => {
           console.log('error', e)
         })
+    },
+    async fetchProvince() {
+      const response = await getProvince();
+      this.provinces = response.data
+    },
+    async fetchRegencies(id) {
+      const response = await getRegencies(id);
+      this.cities = response.data
+      console.log(this.cities)
     }
   }
 }
@@ -163,9 +176,9 @@ export default {
   @apply text-sm font-semibold text-gray-700;
 }
 .input {
-  @apply block px-4 py-2 border border-gray-300 rounded-lg mb-2 w-full focus:ring-dark-main focus:ring-2 hover:ring-1 transition duration-300 hover:ring-dark-main focus:outline-none text-sm focus:border-dark-main font-poppins text-gray-700;
+  @apply block px-4 py-2 border border-gray-300 rounded-lg mb-2 w-full focus:ring-dark-main focus:ring-2 hover:ring-1 transition duration-300 hover:ring-dark-main focus:outline-none text-sm focus:border-dark-main font-inter text-gray-700;
 }
 .button {
-  @apply px-4 py-2 uppercase tracking-wider bg-primary-main block w-full rounded-lg text-white hover:bg-primary-hover duration-300 font-poppins font-bold transition;
+  @apply px-4 py-2 uppercase tracking-wider bg-primary-main block w-full rounded-lg text-white hover:bg-primary-hover duration-300 font-inter font-bold transition;
 }
 </style>

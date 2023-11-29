@@ -68,9 +68,9 @@ export default {
   @apply text-sm font-semibold text-gray-700;
 }
 .input {
-  @apply block px-4 py-2 border border-gray-300 rounded-lg mb-2 w-full focus:ring-primary-main focus:ring-2 hover:ring-1 transition duration-300 hover:ring-primary-main focus:outline-none text-sm focus:border-primary-main font-poppins text-gray-700;
+  @apply block px-4 py-2 border border-gray-300 rounded-lg mb-2 w-full focus:ring-primary-main focus:ring-2 hover:ring-1 transition duration-300 hover:ring-primary-main focus:outline-none text-sm focus:border-primary-main font-inter text-gray-700;
 }
 .button {
-  @apply px-4 py-2 uppercase tracking-wider bg-primary-main block w-full rounded-lg text-white hover:bg-primary-hover duration-300 font-poppins font-bold transition;
+  @apply px-4 py-2 uppercase tracking-wider bg-primary-main block w-full rounded-lg text-white hover:bg-primary-hover duration-300 font-inter font-bold transition;
 }
 </style>

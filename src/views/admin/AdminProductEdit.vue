@@ -1,5 +1,5 @@
 <template>
-  <h5 class="text-xl font-poppins font-medium mb-6">Ubah Data Product</h5>
+  <h5 class="text-xl font-inter font-medium mb-6">Ubah Data Product</h5>
   <div class="py-6">
     <form>
       <div class="form-group">
@@ -18,6 +18,16 @@
       <div class="form-group">
         <label class="label" for="">Nama Product</label>
         <input v-model="model.name" type="text" placeholder="Nama Product" class="input" />
+      </div>
+      <div class="form-group">
+        <label class="label" for="">Deskripsi</label>
+        <textarea
+          v-model="model.description"
+          cols="30"
+          rows="3"
+          placeholder="Deskripsi Produk"
+          class="input"
+        ></textarea>
       </div>
       <div class="form-group">
         <label class="label" for="">Harga</label>
@@ -81,6 +91,7 @@ export default {
         umkm_id: '',
         code: '',
         name: '',
+        description: '',
         price: 0,
         photos: []
       },
@@ -99,6 +110,7 @@ export default {
           this.model.umkm_id = data.umkm_id
           this.model.code = data.code
           this.model.name = data.name
+          this.model.description = data.description
           this.model.price = data.price
           this.model.photos = data.photos.map((item) => {
             return item.name
@@ -163,9 +175,9 @@ export default {
   @apply text-sm font-semibold text-gray-700;
 }
 .input {
-  @apply block px-4 py-2 border border-gray-300 rounded-lg mb-2 w-full focus:ring-dark-main focus:ring-2 hover:ring-1 transition duration-300 hover:ring-dark-main focus:outline-none text-sm focus:border-dark-main font-poppins text-gray-700;
+  @apply block px-4 py-2 border border-gray-300 rounded-lg mb-2 w-full focus:ring-dark-main focus:ring-2 hover:ring-1 transition duration-300 hover:ring-dark-main focus:outline-none text-sm focus:border-dark-main font-inter text-gray-700;
 }
 .button {
-  @apply px-4 py-2 uppercase tracking-wider bg-primary-main block w-full rounded-lg text-white hover:bg-primary-hover duration-300 font-poppins font-bold transition;
+  @apply px-4 py-2 uppercase tracking-wider bg-primary-main block w-full rounded-lg text-white hover:bg-primary-hover duration-300 font-inter font-bold transition;
 }
 </style>

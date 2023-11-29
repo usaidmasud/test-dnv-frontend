@@ -11,19 +11,19 @@ import { RouterView } from 'vue-router'
       <div class="flex w-full flex-col gap-1 mt-10">
         <RouterLink
           exact-active-class="bg-light-main text-dark-main"
-          class="px-2 py-1 hover:bg-gray-200 hover:text-gray-700 duration-300 rounded-lg w-full text-sm tracking-wider font-medium font-poppins"
+          class="px-2 py-1 hover:bg-gray-200 hover:text-gray-700 duration-300 rounded-lg w-full text-sm tracking-wider font-medium font-inter"
           to="/admin"
           >Dashboard</RouterLink
         >
         <RouterLink
           exact-active-class="bg-light-main text-dark-main"
-          class="px-2 py-1 hover:bg-gray-200 hover:text-gray-700 duration-300 rounded-lg w-full text-sm tracking-wider font-medium font-poppins"
+          class="px-2 py-1 hover:bg-gray-200 hover:text-gray-700 duration-300 rounded-lg w-full text-sm tracking-wider font-medium font-inter"
           to="/admin/umkm"
           >Umkm</RouterLink
         >
         <RouterLink
           active-class="active"
-          class="px-2 py-1 hover:bg-gray-200 hover:text-gray-700 duration-300 rounded-lg w-full text-sm tracking-wider font-medium font-poppins"
+          class="px-2 py-1 hover:bg-gray-200 hover:text-gray-700 duration-300 rounded-lg w-full text-sm tracking-wider font-medium font-inter"
           to="/admin/product"
           >Product</RouterLink
         >
@@ -32,7 +32,7 @@ import { RouterView } from 'vue-router'
     <main class="w-[calc(100%-190px)] text-gray-700 bg-slate-100">
       <nav class="w-full h-14 bg-dark-main flex justify-end items-center px-6">
         <button
-          class="bg-light-main text-dark-main rounded-lg px-2 py-1 text-sm font-semibold font-poppins"
+          class="bg-light-main text-dark-main rounded-lg px-2 py-1 text-sm font-semibold font-inter"
           @click="logout"
         >
           Logout

@@ -1,5 +1,5 @@
 <template>
-  <h5 class="text-xl font-poppins font-medium mb-6">Ubah Data Umkm</h5>
+  <h5 class="text-xl font-inter font-medium mb-6">Ubah Data Umkm</h5>
   <div class="py-6">
     <form>
       <div class="form-group">
@@ -35,15 +35,15 @@
         ></textarea>
         <div class="form-group">
           <label class="label" for="">Provinsi</label>
-          <select v-model="model.province" name="" id="" class="input">
-            <option value="-">Select</option>
+          <select @change="fetchRegencies(this.model.province_id)" v-model="model.province_id" name="" id="" class="input">
+            <option v-for="(item, index) in provinces" :key="index" :value="item.id">{{ item.name }}</option>
           </select>
         </div>
       </div>
       <div class="form-group">
         <label class="label" for="">Kota</label>
-        <select v-model="model.city" name="" id="" class="input">
-          <option value="-">Select</option>
+        <select v-model="model.city_id" name="" id="" class="input">
+          <option v-for="(item, index) in cities" :key="index" :value="item.id">{{ item.name }}</option>
         </select>
       </div>
 
@@ -94,17 +94,20 @@
 <script>
 import { MESSAGE_STATE } from '../../utils/constants/message.constant'
 import { uploadFileService } from '../../utils/libs/services/file.service'
-import { getUmkmServiceById, updateUmkmService } from '../../utils/libs/services/umkm.service'
+import { getProvince, getRegencies, getUmkmServiceById, updateUmkmService } from '../../utils/libs/services/umkm.service'
 export default {
   name: 'AdminUmkmEdit',
   data() {
     return {
+      files: [],
+      provinces: [],
+      cities: [],
       model: {
         name: '',
         description: '',
         address: '',
-        city: '',
-        province: '',
+        city_id: '',
+        province_id: '',
         owner_name: '',
         contact: '',
         photos: []
@@ -113,20 +116,23 @@ export default {
     }
   },
   mounted() {
+    this.fetchProvince()
     this.getDetail(this.$route.params.id)
   },
   methods: {
     async getDetail(id) {
       await getUmkmServiceById(id)
-        .then((res) => {
+        .then(async (res) => {
           const data = res.data.data
+          await this.fetchRegencies(data.province_id)
           this.model.name = data.name
           this.model.description = data.description
           this.model.address = data.address
-          this.model.city = data.city
-          this.model.province = data.province
+          this.model.city_id = data.city_id
+          this.model.province_id = data.province_id
           this.model.owner_name = data.owner_name
           this.model.contact = data.contact
+          // this.cities.push(data.city)
           this.model.photos = data.photos.map((item) => {
             return item.name
           })
@@ -173,6 +179,15 @@ export default {
         .catch((e) => {
           console.log('error', e)
         })
+    },
+    async fetchProvince() {
+      const response = await getProvince();
+      this.provinces = response.data
+    },
+    async fetchRegencies(id) {
+      const response = await getRegencies(id);
+      this.cities = response.data
+      console.log(this.cities)
     }
   }
 }
@@ -186,9 +201,9 @@ export default {
   @apply text-sm font-semibold text-gray-700;
 }
 .input {
-  @apply block px-4 py-2 border border-gray-300 rounded-lg mb-2 w-full focus:ring-dark-main focus:ring-2 hover:ring-1 transition duration-300 hover:ring-dark-main focus:outline-none text-sm focus:border-dark-main font-poppins text-gray-700;
+  @apply block px-4 py-2 border border-gray-300 rounded-lg mb-2 w-full focus:ring-dark-main focus:ring-2 hover:ring-1 transition duration-300 hover:ring-dark-main focus:outline-none text-sm focus:border-dark-main font-inter text-gray-700;
 }
 .button {
-  @apply px-4 py-2 uppercase tracking-wider bg-primary-main block w-full rounded-lg text-white hover:bg-primary-hover duration-300 font-poppins font-bold transition;
+  @apply px-4 py-2 uppercase tracking-wider bg-primary-main block w-full rounded-lg text-white hover:bg-primary-hover duration-300 font-inter font-bold transition;
 }
 </style>

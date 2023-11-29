@@ -2,7 +2,7 @@
   <div class="">
     <div class="bg-white shadow-lg rounded-lg w-64 p-6">
       <div class="flex justify-between items-center">
-        <h5 class="font-bold font-poppins text-base">Umkm</h5>
+        <h5 class="font-bold font-inter text-base">Umkm</h5>
         <div class="bg-gray-200 text-primary-main p-2 rounded-full">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="mt-4">
-        <h3 class="font-normal font-poppins text-3xl">18,417</h3>
+        <h3 class="font-normal font-inter text-3xl">18,417</h3>
       </div>
     </div>
   </div>

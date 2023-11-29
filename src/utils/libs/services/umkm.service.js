@@ -1,3 +1,4 @@
+import axios from 'axios'
 import instance from '../api/instance'
 // const baseURL = import.meta.env.VUE_APP_API_URL
 export const getUmkmService = async () => {
@@ -27,5 +28,16 @@ export const updateUmkmService = async (id, data) => {
 
 export const deleteUmkmService = async (id) => {
   const response = await instance.delete('/umkm/' + id)
+  return response
+}
+export const getProvince = async () => {
+  const response = await axios.get(
+    'https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json'
+  )
+  return response
+}
+export const getRegencies = async (id) => {
+  const response = await axios.get(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${id}.json`
+  )
   return response
 }

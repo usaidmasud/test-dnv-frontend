@@ -12,25 +12,25 @@
     <nav class="inline-flex items-center gap-2">
       <RouterLink
         exact-active-class="active"
-        class="font-nunito text-sm font-medium hover:bg-dark-main hover:text-light-main px-2 py-1 rounded-lg transition duration-300"
+        class="font-nunito text-sm font-medium hover:bg-dark-main hover:text-light-main px-3 py-2 rounded-lg transition duration-300"
         to="/"
         >Beranda</RouterLink
       >
       <RouterLink
-        class="font-nunito text-sm font-medium hover:bg-dark-main hover:text-light-main px-2 py-1 rounded-lg transition duration-300"
+        class="font-nunito text-sm font-medium hover:bg-dark-main hover:text-light-main px-3 py-2 rounded-lg transition duration-300"
         to="/umkm"
         exact-active-class="active"
         >Umkm</RouterLink
       >
       <RouterLink
-        class="font-nunito text-sm font-medium hover:bg-dark-main hover:text-light-main px-2 py-1 rounded-lg transition duration-300"
+        class="font-nunito text-sm font-medium hover:bg-dark-main hover:text-light-main px-3 py-2 rounded-lg transition duration-300"
         to="/product"
         active-class="active"
         >Product</RouterLink
       >
       <RouterLink class="ml-4" :to="{ name: 'signin' }"
         ><button
-          class="px-2 py-1 rounded-lg bg-primary-main text-white text-sm font-semibold hover:bg-primary-hover duration-300"
+          class="px-3 py-2 rounded-lg bg-primary-main text-white text-sm font-semibold hover:bg-primary-hover duration-300"
         >
           Signin
         </button></RouterLink

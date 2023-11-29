@@ -1,10 +1,10 @@
 <template>
-  <h5 class="text-xl font-poppins font-medium">Data Product</h5>
+  <h5 class="text-xl font-inter font-medium">Data Product</h5>
 
   <div class="flex justify-end py-6">
     <button
       @click="handleAdd"
-      class="bg-primary-main text-white hover:bg-primary-hover duration-300 rounded-lg text-sm px-4 py-2 font-poppins tracking-wide font-medium"
+      class="bg-primary-main text-white hover:bg-primary-hover duration-300 rounded-lg text-sm px-4 py-2 font-inter tracking-wide font-medium"
     >
       Tambah
     </button>
@@ -16,7 +16,8 @@
           <th style="width: 50">#</th>
           <th>Nama UMKM</th>
           <th>Kode</th>
-          <th>Nama Product</th>
+          <th>Nama Produk</th>
+          <th>Deskripsi</th>
           <th>Photo</th>
           <th>Harga</th>
           <th>Action</th>
@@ -29,6 +30,7 @@
           <td>{{ item.umkm.name }}</td>
           <td>{{ item.code }}</td>
           <td>{{ item.name }}</td>
+          <td>{{ filters.str_limit(item.description, 50) }}</td>
           <td class="inline-flex items-center flex-wrap gap-1">
             <!-- <CoolLightBox :items="item.photos.map((photo) => photo.name)" :index="index" @close="index = null"> </CoolLightBox> -->
 
@@ -54,14 +56,14 @@
                 }"
               >
                 <button
-                  class="px-2 py-1 rounded-lg bg-green-700 hover:bg-green-800 text-gray-100 duration-300 text-xs font-medium font-poppins"
+                  class="px-2 py-1 rounded-lg bg-green-700 hover:bg-green-800 text-gray-100 duration-300 text-xs font-medium font-inter"
                 >
                   Edit
                 </button>
               </RouterLink>
               <button
                 @click="handleDelete(item.id)"
-                class="px-2 py-1 rounded-lg bg-red-700 hover:bg-red-800 text-gray-100 duration-300 text-xs font-medium font-poppins"
+                class="px-2 py-1 rounded-lg bg-red-700 hover:bg-red-800 text-gray-100 duration-300 text-xs font-medium font-inter"
               >
                 Hapus
               </button>
@@ -141,9 +143,9 @@ table {
   @apply w-full table-auto;
 }
 table th {
-  @apply border-b-2 border-gray-400 px-4 py-1.5 text-sm font-semibold font-poppins;
+  @apply border-b-2 border-gray-400 px-4 py-1.5 text-sm font-semibold font-inter;
 }
 table td {
-  @apply px-4 py-1.5 border-b border-gray-300 font-normal text-sm font-poppins;
+  @apply px-4 py-1.5 border-b border-gray-300 font-normal text-sm font-inter;
 }
 </style>

@@ -5,6 +5,7 @@ import AuthLayoutView from '../layouts/AuthLayoutView.vue'
 import GuestLayoutView from '../layouts/GuestLayoutView.vue'
 import HomeView from '../views/HomeView.vue'
 import ProductView from '../views/ProductView.vue'
+import ProductDetail from '../views/ProductDetail.vue'
 import SignInView from '../views/SignInView.vue'
 import UmkmView from '../views/UmkmView.vue'
 import Dashboard from '../views/admin/Dashboard.vue'
@@ -41,6 +42,12 @@ const router = createRouter({
           name: 'product',
           meta: { requiresAuth: false },
           component: ProductView
+        },
+        {
+          path: '/product/:id',
+          name: 'product.detail',
+          meta: { requiresAuth: false },
+          component: ProductDetail
         }
       ]
     },
