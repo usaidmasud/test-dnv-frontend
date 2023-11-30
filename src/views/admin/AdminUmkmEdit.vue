@@ -197,11 +197,11 @@ export default {
     },
     async fetchProvince() {
       const response = await getProvince()
-      this.provinces = response.data
+      this.provinces = response.data.data
     },
     async fetchRegencies(id) {
       const response = await getRegencies(id)
-      this.cities = response.data
+      this.cities = response.data.data
       console.log(this.cities)
     }
   }

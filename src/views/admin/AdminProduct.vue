@@ -47,7 +47,7 @@
               <img class="w-8 h-8" :src="'http://localhost:8000/storage/' + photo.name" alt="" />
             </div>
           </td>
-          <td>{{ item.price }}</td>
+          <td>{{ filters.formatMoney(item.price) }}</td>
           <td>
             <div class="inline-flex items-center gap-1">
               <RouterLink

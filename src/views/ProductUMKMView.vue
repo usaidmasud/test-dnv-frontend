@@ -3,12 +3,12 @@
     <div class="my-6 grid grid-cols-2 gap-6 items-center">
       <div v-if="umkm !== null" class="">
         <div
-          class="w-full rounded-lg text-white bg-gradient-to-r from-indigo-600 to-purple-600 flex gap-2 overflow-hidden"
+          class="w-full rounded-lg bg-slate-200 shadow-lg  flex gap-2 overflow-hidden"
         >
           <img
             :src="'http://localhost:8000/storage/' + umkm?.photos[0].name"
             alt=""
-            class="w-24 h-auto bg-indigo-600"
+            class="w-28 h-auto"
           />
           <div class="p-4">
             <h5 class="font-medium font-inter text-base">{{ umkm?.name }}</h5>

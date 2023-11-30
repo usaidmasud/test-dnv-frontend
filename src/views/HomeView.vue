@@ -22,7 +22,7 @@
     <section class="py-6">
       <ProductSection :products="products">
         <div class="flex justify-between mb-6">
-          <h2 class="text-xl font-inter font-semibold">Catalog</h2>
+          <h2 class="text-xl font-inter font-semibold">Produk</h2>
           <div class="">
             <button
               @click="this.$router.push('/product')"
@@ -60,7 +60,7 @@ export default {
     return {
       meta: {
         page: 1,
-        per_page:3,
+        per_page:6,
         totalPage: 0,
         total: 0,
         search:""
